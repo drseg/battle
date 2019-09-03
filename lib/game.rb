@@ -11,6 +11,10 @@ class Game
     @game
   end
 
+  def attack(player)
+    player.receive_damage
+  end
+
   private
 
   def initialize(player1, player2)

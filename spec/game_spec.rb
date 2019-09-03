@@ -13,4 +13,11 @@ describe Game do
     expect(subject.player1).to eq player1
     expect(subject.player2).to eq player2
   end
+
+  describe '#attack' do
+    it 'damages the player' do
+      expect(player2).to receive(:receive_damage)
+      subject.attack(player2)
+    end
+  end
 end
