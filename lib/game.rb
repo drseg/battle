@@ -24,6 +24,11 @@ class Game
     @players.last
   end
 
+  def loser
+    loser = @players.select { |p| p.hit_points <= 0 }
+    loser.empty? ? nil : loser.first
+  end
+
   private
 
   def initialize(player1, player2)

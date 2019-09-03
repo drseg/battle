@@ -5,6 +5,10 @@ describe Game do
   let(:player2) { double('Player', name: 'player 2') }
   subject { Game.create(player1, player2) }
 
+  before :each do
+    [player1, player2].each { |p| allow(p).to receive(:receive_damage) }
+  end
+
   it 'should be a singleton instance' do
     expect(Game.create(player1, player2)).to eq Game.instance
   end
@@ -29,10 +33,22 @@ describe Game do
     end
 
     it 'switches the current player' do
-      allow(player2).to receive(:receive_damage)
       subject.attack
       expect(subject.current_player).to be player2
       expect(subject.current_opponent).to be player1
+    end
+  end
+
+  describe 'loser' do
+    it 'is nil by default' do
+      [player1, player2].each { |p| allow(p).to receive(:hit_points).and_return 60 }
+      expect(subject.loser).to be_nil
+    end
+
+    it 'returns first player with zero hit points' do
+      allow(player2).to receive(:hit_points).and_return 0
+      allow(player1).to receive(:hit_points).and_return 60
+      expect(subject.loser).to be player2
     end
   end
 end
