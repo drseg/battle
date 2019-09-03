@@ -9,6 +9,10 @@ class Battle < Sinatra::Base
     erb :index
   end
 
+  before do
+    @game = Game.instance
+  end
+
   post '/names' do
     Game.create(Player.new(params['player_1_name']),
                 Player.new(params['player_2_name']))
@@ -16,12 +20,10 @@ class Battle < Sinatra::Base
   end
 
   get '/play' do
-    @game = Game.instance
     erb :play
   end
 
   post '/attack' do
-    @game = Game.instance
     @game.attack
     if @game.loser
       redirect '/game_over'
@@ -31,12 +33,10 @@ class Battle < Sinatra::Base
   end
 
   get '/attack-confirmation' do
-    @game = Game.instance
     erb :attack
   end
 
   get '/game_over' do
-    @game = Game.instance
     erb :game_over
   end
 
