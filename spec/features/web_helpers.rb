@@ -9,5 +9,5 @@ end
 
 def sign_in_play_and_attack
   sign_in_and_play
-  click_link 'Attack'
+  click_button 'Attack'
 end

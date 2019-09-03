@@ -4,4 +4,6 @@
 
 <%= @game.current_player.name %>'s turn
 
-<a href="/attack">Attack</a>
+<form action="/attack" method="post">
+  <input type="submit" value="Attack">
+</form>

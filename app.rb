@@ -20,14 +20,19 @@ class Battle < Sinatra::Base
     erb :play
   end
 
-  get '/attack' do
+  post '/attack' do
     @game = Game.instance
     @game.attack
     if @game.loser
       redirect '/game_over'
     else
-      erb :attack
+      redirect '/attack-confirmation'
     end
+  end
+
+  get '/attack-confirmation' do
+    @game = Game.instance
+    erb :attack
   end
 
   get '/game_over' do
