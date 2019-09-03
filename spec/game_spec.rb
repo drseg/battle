@@ -14,10 +14,25 @@ describe Game do
     expect(subject.player2).to eq player2
   end
 
+  it 'should start with player 1' do
+    expect(subject.current_player).to eq player1
+  end
+
+  it 'should start with player 2 as opponent' do
+    expect(subject.current_opponent).to eq player2
+  end
+
   describe '#attack' do
-    it 'damages the player' do
+    it 'damages the opponent' do
       expect(player2).to receive(:receive_damage)
-      subject.attack(player2)
+      subject.attack
+    end
+
+    it 'switches the current player' do
+      allow(player2).to receive(:receive_damage)
+      subject.attack
+      expect(subject.current_player).to be player2
+      expect(subject.current_opponent).to be player1
     end
   end
 end

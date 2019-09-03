@@ -11,8 +11,17 @@ class Game
     @game
   end
 
-  def attack(player)
-    player.receive_damage
+  def attack
+    current_opponent.receive_damage
+    @players.rotate!
+  end
+
+  def current_player
+    @players.first
+  end
+
+  def current_opponent
+    @players.last
   end
 
   private
@@ -20,5 +29,6 @@ class Game
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
+    @players = [player1, player2]
   end
 end

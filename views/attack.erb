@@ -1,4 +1,5 @@
-<%= @game.player1.name %> attacked <%= @game.player2.name %>
+<%= @game.current_opponent.name %> attacked <%= @game.current_player.name %>
 
-<%= @game.player2.name %>: <%= @game.player2.hit_points %>HP
+<%= @game.current_player.name %>: <%= @game.current_player.hit_points %> HP
 
+<a href="/play">OK</a>

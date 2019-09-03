@@ -6,3 +6,8 @@ def sign_in_and_play
   fill_in :player_2_name, with: 'Player 2'
   click_button 'Start Game'
 end
+
+def sign_in_play_and_attack
+  sign_in_and_play
+  click_link 'Attack'
+end
