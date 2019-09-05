@@ -1,16 +1,18 @@
-require './lib/game'
+# frozen_string_literal: true
 
-describe Game do
+require './lib/battle_rules'
+
+describe BattleRules do
   let(:player1) { double('Player', name: 'player 1') }
   let(:player2) { double('Player', name: 'player 2') }
-  subject { Game.create(player1, player2) }
+  subject { BattleRules.create(player1, player2) }
 
   before :each do
     [player1, player2].each { |p| allow(p).to receive(:receive_damage) }
   end
 
   it 'should be a singleton instance' do
-    expect(Game.create(player1, player2)).to eq Game.instance
+    expect(BattleRules.create(player1, player2)).to eq BattleRules.instance
   end
 
   it 'should have two players' do
@@ -39,7 +41,7 @@ describe Game do
     end
   end
 
-  describe 'loser' do
+  describe '#loser' do
     it 'is nil by default' do
       [player1, player2].each { |p| allow(p).to receive(:hit_points).and_return 60 }
       expect(subject.loser).to be_nil
